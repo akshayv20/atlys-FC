@@ -33,7 +33,7 @@ const FunctionCard = ({ title, equation, onChange, nextFunction, index }) => {
               className='border h-8 border-gray-300 rounded-md p-2 text-xs bg-gray-100 w-full'
             >
               <option key={nextFunction} value={nextFunction}>
-                {nextFunction != -1 ? `Function ${nextFunction}` : "-"}
+                {nextFunction !== -1 ? `Function ${nextFunction}` : "-"}
               </option>
             </select>
           </div>
