@@ -13,14 +13,12 @@ import "./App.css";
 import { debounce } from "./Component/utils/debounce";
 
 const App = () => {
-  // Load initial value from localStorage or default to 2
   const [initialValue, setInitialValue] = useState(() => {
     return (
       parseFloat(localStorage.getItem(LOCAL_STORAGE_KEYS.INITIAL_VALUE)) || 2
     );
   });
 
-  // Load functions from localStorage or use default functions
   const [functions, setFunctions] = useState(() => {
     const storedFunctions = localStorage.getItem(LOCAL_STORAGE_KEYS.FUNCTIONS);
     if (storedFunctions) {
@@ -30,7 +28,6 @@ const App = () => {
       }
     }
 
-    // Store default functions in localStorage if not present
     localStorage.setItem(
       LOCAL_STORAGE_KEYS.FUNCTIONS,
       JSON.stringify(defaultFunctions)
@@ -40,11 +37,9 @@ const App = () => {
 
   const order = [0, 1, 3, 4, 2];
 
-  // Calculate chained functions and final output
   const { updatedFunctions, finalOutput, setUpdatedFunctions } =
     useCalculateChainedFunctions(initialValue, functions, order);
 
-  // Handle diagram connections
   const connections = [
     { from: "connector-input", to: "input-1" },
     { from: "output-1", to: "input-2" },
@@ -56,7 +51,6 @@ const App = () => {
 
   const svgRef = useConnections(connections);
 
-  // Handle equation changes for functions
   const handleEquationChange = (index, newEquation) => {
     if (validateEquation(newEquation)) {
       const updated = [...updatedFunctions];
@@ -64,7 +58,6 @@ const App = () => {
       setUpdatedFunctions(updated);
       setFunctions(updated);
 
-      // Save updated functions to localStorage
       localStorage.setItem(
         LOCAL_STORAGE_KEYS.FUNCTIONS,
         JSON.stringify(updated)
@@ -72,7 +65,6 @@ const App = () => {
     }
   };
 
-  // Save initialValue and finalOutput to localStorage on change
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEYS.INITIAL_VALUE, initialValue);
   }, [initialValue]);

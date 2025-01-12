@@ -8,6 +8,7 @@ export const calculateOutput = (equation, input) => {
 
     modifiedEquation = modifiedEquation.replaceAll("x", `(${input})`);
 
+    // eslint-disable-next-line no-new-func
     const result = Function(`return ${modifiedEquation}`)();
     return result;
   } catch (error) {

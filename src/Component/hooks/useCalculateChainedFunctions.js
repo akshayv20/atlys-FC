@@ -30,6 +30,7 @@ const useCalculateChainedFunctions = (initialValue, functions, order) => {
     };
 
     calculateChainedFunctions();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(functions), initialValue]);
 
   return { updatedFunctions, finalOutput, setUpdatedFunctions };
